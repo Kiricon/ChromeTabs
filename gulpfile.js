@@ -2,13 +2,13 @@ const gulp = require('gulp');
 const browserSync = require('browser-sync').create();
 
 const uglify = require('gulp-uglify');
-const cleanCSS = require('gulp-clean-css'); 
+const cleanCSS = require('gulp-clean-css');
 const cache = require('gulp-cached');
 const fs = require('fs');
 
 
 const paths = {
-  sass: "./src/**/*.scss",
+  sass: "./src/**/*.css",
   js: "./src/js/**/*.js",
   html: "./src/*.html"
 }
@@ -31,8 +31,7 @@ gulp.task('watchjs', ['convertjs'], function(){browserSync.reload();});
 gulp.task('watchhtml', ['converthtml'], function(){browserSync.reload();});
 
 gulp.task('convertcss', function(){
-  return sass(paths.sass)
-          .on('error', sass.logError)
+  return gulp.src(paths.sass)
           .pipe(cache('csscache'))
           .pipe(cleanCSS({compatibility: 'ie8'}))
           .pipe(gulp.dest('./dist'))
@@ -48,13 +47,13 @@ gulp.task('browser-sync', function(){
 });
 
 gulp.task('watch', function(){
-  
+
   gulp.watch(paths.js, ['watchjs']);
   gulp.watch(paths.sass, ['convertcss']);
   gulp.watch(paths.html, ['watchhtml']);
-  
 
-  
+
+
 });
 
 gulp.task('run', ['browser-sync', 'watch']);
