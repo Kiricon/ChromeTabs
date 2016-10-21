@@ -13,3 +13,13 @@ body {
   background: #eee;
   height: 50px;
 }
+
+.tab {
+  background: #ccc;
+  width: 20%;
+  border: solid 1px #999;
+  height: 40px;
+  float: left;
+  margin-top: 8px;
+  -webkit-transform: perspective(100px) rotateX(10deg);
+}
